@@ -27,3 +27,10 @@ def recipe(request):
     ingredient = ["maggie","tomato"]
     data={"name":"maggie","time":20,"ingredient":ingredient}
     return render(request,"recipe.html",data)
+
+def team(request):
+    player=["rajat patidar","venk iyer","hazlewood"]
+    data={"teamname":"RCB","captain":"virat kohli","player":player,"trophy":1}
+    return render(request,"team.html",data)
+
+

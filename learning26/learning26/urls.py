@@ -28,4 +28,5 @@ urlpatterns = [
     path('show/', views.show),
     path('news/', views.news),
     path("recipe/",views.recipe),
+    path("team/",views.team),
 ]
