@@ -17,6 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from . import views
+from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,4 +30,7 @@ urlpatterns = [
     path('news/', views.news),
     path("recipe/",views.recipe),
     path("team/",views.team),
+
+    #app level url config
+    path("student/",include("student.urls")),
 ]
