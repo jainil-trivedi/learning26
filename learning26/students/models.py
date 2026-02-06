@@ -104,6 +104,56 @@ class internDetails(models.Model):
     def __str__(self):
         return self.internID.internName
     
+class teacher(models.Model):
+    teacherName=models.CharField(max_length=100)
+    phoneNo=models.IntegerField(max_length=10)
+    Email=models.EmailField()
+    
+    class Meta:
+        db_table = 'teacher'
+    
+    def __str__(self):
+        return self.teacherName
+    
+class subject(models.Model):
+    subject=(("BEE","BEE"),("BME","BME"),("M-2","M-2"))
+    subName=models.CharField(max_length=100,choices=subject)
+    subID=models.IntegerField(max_length=25)
+    teacher = models.ForeignKey(teacher,on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'subject'
+
+    def __str__(self):
+        return self.teacher.teacherName
+    
+class company(models.Model):
+    CoName=models.CharField(max_length=100)
+    CoAdress=models.CharField(max_length=100)
+    Email=models.EmailField()
+    CoPhone=models.IntegerField(max_length=10)
+
+    class Meta:
+        db_table = 'company'
+
+    def __str__(self):
+        return self.CoName
+    
+class employee(models.Model):
+    EmID=models.IntegerField(max_length=25)
+    EmName=models.CharField(max_length=100)
+    EmSalary=models.IntegerField(max_length=50)
+    ComName=models.ForeignKey(company, on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'employee'
+
+    def __str__(self):
+        return self.ComName.CoName
+
+
+
+    
 
 
 
