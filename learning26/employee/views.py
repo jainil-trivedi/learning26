@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render,HttpResponse
 from .models import Employee
+from .forms import EmployeeForm,CourseForm,DepartmentForm
+
 # Create your views here.
 def employeeList(request):
     #employees = Employee.objects.all() #select * from employee 
@@ -68,3 +70,41 @@ def employeeFilter(request):
     print("query16",employee16)
     print("query17",employee17)
     return render(request, 'employee/employeeFilter.html')
+
+# create (without using form)
+def createEmployee(request):    
+    Employee.objects.create(name="ajay",age=23,salary=23000,post="HR",join_date="2022-01-01")
+    return HttpResponse("EMPLOYEE CREATED...")
+
+#create using form
+
+def createEmployeeWithForm(request):
+    print(request.method)
+    if request.method == "POST":
+        form = EmployeeForm(request.POST)
+        form.save() #it same as create
+        return HttpResponse("EMPLOYEE CREATED...")
+    else:
+        #form object create --> html
+        form = EmployeeForm() #form object        
+        return render(request,"employee/createEmployeeForm.html",{"form":form})
+
+
+def createCourse(request):
+    if request.method == "POST":
+        form = CourseForm(request.POST) #csrftoken,form alll fileds data
+        form.save() #create.. insert into table 
+        return HttpResponse("COURSE CREATED...")
+    else:
+        form = CourseForm()
+        return render(request,"employee/createCourse.html",{"form":form})    
+    
+
+def DepartmentWithForm(request):
+    if request.method == "POST":
+        form = DepartmentForm(request.POST) #csrftoken,form alll fileds data
+        form.save() #create.. insert into table 
+        return HttpResponse("DEPARTMENT CREATED...")
+    else:
+        form = DepartmentForm()
+        return render(request,"employee/DepartmentForm.html",{"form":form})    
