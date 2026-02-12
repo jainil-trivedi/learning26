@@ -6,5 +6,6 @@ urlpatterns = [
     path('createEmployee/',views.createEmployee),
     path('createEmployeeForm/',views.createEmployeeWithForm,name='createEmployeeWithForm'),
     path('createCourse/',views.createCourse),
-    path('Department/',views.DepartmentWithForm)
+    path('Department/',views.DepartmentWithForm),
+    path("deleteEmployee/<int:id>",views.deleteEmployee,name="deleteEmployee"),
 ]
