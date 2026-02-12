@@ -116,4 +116,21 @@ def deleteEmployee(request,id):
     #return HttpResponse("EMPLOYEE DELETED...")
     #employee list redirecr
     return redirect("employeeList") #url --> name -->
- 
+
+def filterEmployee(request):
+    print("filter employee called..")
+    employees = Employee.objects.filter(age__gte=25).values()
+    print("filter employees = ",employees)
+    #return redirect("employeeList")
+    return render(request,'employee/employeeList.html',{'employees': employees})
+
+def sortEmployee(request,id):
+    if id == 1:
+        print("Employee age in ASC Order")
+        employees = Employee.objects.order_by("age").values()
+    elif id == 2:
+        print("Employee age in DESC Order")
+        employees = Employee.objects.order_by("-age").values()
+    else:
+        print("Select 1 for ASC order\n Select 2 for DESC order " )
+    return render(request,'employee/employeeList.html',{'employees': employees})
