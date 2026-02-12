@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse
+from django.shortcuts import render,HttpResponse,redirect
 from .models import Employee
 from .forms import EmployeeForm,CourseForm,DepartmentForm
 
@@ -83,7 +83,7 @@ def createEmployeeWithForm(request):
     if request.method == "POST":
         form = EmployeeForm(request.POST)
         form.save() #it same as create
-        return HttpResponse("EMPLOYEE CREATED...")
+        return redirect("employeeList")
     else:
         #form object create --> html
         form = EmployeeForm() #form object        
@@ -107,4 +107,13 @@ def DepartmentWithForm(request):
         return HttpResponse("DEPARTMENT CREATED...")
     else:
         form = DepartmentForm()
-        return render(request,"employee/DepartmentForm.html",{"form":form})    
+        return render(request,"employee/DepartmentForm.html",{"form":form})   
+
+def deleteEmployee(request,id):
+    #delete from employees where id = 1
+    print("id from url = ",id)
+    Employee.objects.filter(id=id).delete()
+    #return HttpResponse("EMPLOYEE DELETED...")
+    #employee list redirecr
+    return redirect("employeeList") #url --> name -->
+ 
