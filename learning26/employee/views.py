@@ -5,7 +5,7 @@ from .forms import EmployeeForm,CourseForm,DepartmentForm
 # Create your views here.
 def employeeList(request):
     #employees = Employee.objects.all() #select * from employee 
-    employees = Employee.objects.all().values()
+    employees = Employee.objects.all().order_by("id").values()
     #employees = Employee.objects.all().values_list()
     print(employees)
     return render(request,'employee/employeeList.html',{"employees":employees})
@@ -134,3 +134,14 @@ def sortEmployee(request,id):
     else:
         print("Select 1 for ASC order\n Select 2 for DESC order " )
     return render(request,'employee/employeeList.html',{'employees': employees})
+
+def updateEmployee(request,id):
+    employee = Employee.objects.get(id=id) #select * from employee where id = 1
+
+    if request.method=="POST":
+        form = EmployeeForm(request.POST,instance=employee)
+        form.save()
+        return redirect("employeeList")
+    else:
+        form = EmployeeForm(instance=employee)
+        return render(request,"employee/updateEmployee.html",{"form" : form})
