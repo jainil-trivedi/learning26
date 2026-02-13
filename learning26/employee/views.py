@@ -109,6 +109,7 @@ def DepartmentWithForm(request):
         form = DepartmentForm()
         return render(request,"employee/DepartmentForm.html",{"form":form})   
 
+# for delete
 def deleteEmployee(request,id):
     #delete from employees where id = 1
     print("id from url = ",id)
@@ -124,6 +125,7 @@ def filterEmployee(request):
     #return redirect("employeeList")
     return render(request,'employee/employeeList.html',{'employees': employees})
 
+# for sort
 def sortEmployee(request,id):
     if id == 1:
         print("Employee age in ASC Order")
@@ -135,6 +137,7 @@ def sortEmployee(request,id):
         print("Select 1 for ASC order\n Select 2 for DESC order " )
     return render(request,'employee/employeeList.html',{'employees': employees})
 
+#for update
 def updateEmployee(request,id):
     employee = Employee.objects.get(id=id) #select * from employee where id = 1
 
