@@ -1,0 +1,23 @@
+<h1>SERVICE LIST</h1>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ser in form  %}
+        <tr>
+            <td>{{ser.id}}</td>
+            <td>{{ser.name}}</td>
+            <td>{{ser.category}}</td>
+            <td>{{ser.description}}</td>
+            <td>{{ser.price}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
