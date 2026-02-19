@@ -6,4 +6,6 @@ urlpatterns = [
    path("dashboard/",views.studentDashboard),
    path("marks/",views.studentmarks),
    path("id/",views.studentid),
+   path("servicelist/",views.servicelist,name="servicelist"),
+   path("createService/",views.createService,name="createService"),
 ]
